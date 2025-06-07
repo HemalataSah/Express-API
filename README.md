@@ -1,4 +1,4 @@
 # Express-API
 Creating an API for understanding
 <br>
-Author - Hemalata Sah
+Author - Hemalata Sah (NIC)

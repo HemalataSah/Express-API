@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Form</title>
+</head>
+<body>
+    <h1>Employee Registration</h1>
+    <form id="employeeForm"action="">
+        <label for="empcode">EmpCode:</label>
+        <input type="number" id="empcode" name="empcode" required> <br><br>
+        
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required> <br><br>
+        
+        <label for="qualification">Qualification:</label>
+        <input type="text" id="qualification" name="qualification" required><br><br>
+
+        <label for="branch">Branch:</label>
+        <input type="text" id="branch" name="branch" required><br><br>
+
+        <label for="company">Company:</label>
+        <input type="text" id="company" name="company" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+    <p id="response"></p>
+    <script>
+        document.getElementById('employeeForm').addEventListener('submit', async function(e){
+            e.preventDefault();
+
+            const empcode = document.getElementById('empcode').value;
+            const name = document.getElementById('name').value;
+            const qualification = document.getElementById('qualification').value;
+            const branch = document.getElementById('branch').value;
+            const company = document.getElementById('company').value;
+            const response = await fetch(`api/insert/${empcode}/${name}/${qualification}/${branch}/${company}`,{
+            method: 'POST'
+        });
+
+        const result = await response.json();
+        document.getElementById('response').textContent =result.message;
+        });
+    </script>
+</body>
+</html>

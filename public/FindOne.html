@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Findone</title>
+</head>
+<body>
+    <form action="" id="EmployeeForm">
+        Employee Code: <input type="number"  id="empCode" name="empCode"> <br><br>
+        <button type="submit"></button>
+        <div id="response"></div>
+    </form>
+    <script>
+        document.getElementById('EmployeeForm').addEventListener('submit',async function(e){
+            e.preventDefault();
+            const empCode = document.getElementById('empCode').value;
+            const response = await fetch(`api/find/${empCode}`, {
+            method: 'GET'
+           } );
+        const result = await response.json();
+        const employee = result.data;
+        document.getElementById('response').innerHTML =
+        `<strong>${result.message}</strong><br>
+        EmpCode: ${employee.EmpCode}<br>
+        Name: ${employee.Name}<br>
+        Qualification: ${employee.Qualification}<br>
+        Branch: ${employee.Branch}<br>
+        Company: ${employee.Company}`;
+            });
+
+    </script>
+    
+</body>
+</html>

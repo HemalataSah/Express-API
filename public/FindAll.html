@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Findone</title>
+</head>
+<body>
+   <form id="EmployeeForm">
+  <button type="submit">Show Employees</button>
+</form>
+<table border="1" style="width: 100%; border-collapse: collapse;">
+  <thead>
+    <tr>
+      <th>EmpCode</th>
+      <th>Name</th>
+      <th>Qualification</th>
+      <th>Branch</th>
+      <th>Company</th>
+    </tr>
+  </thead>
+  <tbody id="employeeTableBody">
+    <!-- Rows get injected here -->
+  </tbody>
+</table>
+    <script>
+document.getElementById('EmployeeForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const response = await fetch(`/api/findall`, {
+        method: 'GET'
+    });
+
+    const employees = await response.json();
+    console.log(employees);
+
+    let rows = '';
+    employees.forEach(emp => {
+        rows += `
+            <tr>
+                <td>${emp.EmpCode}</td>
+                <td>${emp.Name}</td>
+                <td>${emp.Qualification}</td>
+                <td>${emp.Branch}</td>
+                <td>${emp.Company}</td>
+            </tr>
+        `;
+    });
+
+    document.getElementById('employeeTableBody').innerHTML = rows;
+});
+</script>
+</body>
+</html>
