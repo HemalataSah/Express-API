@@ -3,8 +3,9 @@ const path = require('path');
 const {MongoClient} = require("mongodb");
 var app = express();
 
-
-var uri = 'mongodb://localhost:27017/';
+// -e ME_CONFIG_MONGODB_URL="mongodb://admin:qwerty@mongo:27017" 
+// var uri = 'mongodb://admin:qwerty@localhost:27017';
+var uri = 'mongodb://admin:qwerty@localhost:27017/?authSource=admin';
 const client = new MongoClient(uri);
 var collection;
 
@@ -20,7 +21,7 @@ async function connectMongo() {
         await client.connect();
         console.log("Connected to Mongodb");
         db = client.db("Student");
-        collection = db.collection("2023");
+        collection = db.collection("Details");
         console.log("Connected to Collection");
     }
     catch (error){
